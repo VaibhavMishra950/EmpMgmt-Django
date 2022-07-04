@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Employee</title>
+    <link rel="stylesheet" href="{% static 'fapro/css/all.css' %}">
+    <style>
+        :root {
+            --accent: #262626;
+            --accent-light: #26262622;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+            user-select: none;
+            transition: 0.3s;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 3em;
+            margin-top: 20px;
+        }
+
+        .box {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+
+        .delInput form {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .delInput form input {
+            width: 450px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 21px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            outline: none;
+            color: var(--accent);
+        }
+
+        .delInput form input:placeholder-shown {
+            border: 2px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .delInput form input:focus {
+            border: 2px solid var(--accent);
+        }
+
+        .delInput form input:focus::placeholder {
+            color: var(--accent);
+        }
+
+        .delInput form button {
+            width: 140px;
+            height: 40px;
+            margin: 10px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            color: white;
+            font-weight: 600;
+        }
+        .userData{
+            display: grid;
+            grid-template-columns: auto auto;
+            margin-top: 20px;
+        }
+        .userData p{
+            margin: 10px 0;
+        }
+        .userData p:nth-child(2n-1){
+            font-weight: 600;
+        }
+        .delBtn{
+            margin-top: 40px;
+            padding: 10px 20px ;
+            border-radius: 38px;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            border: 2px soplid var(--accent);
+            cursor: pointer;
+        }
+        .backLink{
+            text-decoration: none;
+            color: var(--accent);
+            margin: 10px;
+            font-size: 18px;
+        }
+        button:disabled{
+            background: #555;
+            cursor: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="backLink"><i class="fa fa-angle-left"></i> Home</a>
+    <center>
+        <h1>Delete Employee</h1>
+    </center>
+    <div class="box">
+        <div class="delInput">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <input type="text" id="inp" name='empid' placeholder="Enter Employee ID">
+                <button type="submit">Get Data</button>
+            </form>
+        </div>
+        <div class="delBox">
+            
+        <div class="userData">
+            <p>Employee's ID: </p>
+            <p class='data'>Emp01</p>
+
+            <p>Employee's Name: </p>
+            <p class='data'>Vaibhav Mishra</p>
+
+            <p>Employee's Post: </p>
+            <p class='data'>Chief Executing Officer</p>
+
+            <p>Employee's Gender: </p>
+            <p class='data'>Male</p>
+
+            <p>Employee's Salary: </p>
+            <p class='data'>150</p>
+
+            <p>Employee's Mobile: </p>
+            <p class='data'>8989898989</p>
+        </div>
+        <center><button class="delBtn">Delete Employee</button></center>
+        </div>
+    </div>
+<script>
+    let datas = document.querySelectorAll('.data');
+    let list =  {{ empList | safe }}
+
+    for (let x = 0; x < datas.length; x++) {
+        datas[x].innerText = list[x];
+    }
+    let list2 =  {{ empList | safe }}
+    let delBtn = document.querySelector('.delBtn');
+    if(list2[0] == "......."){
+        delBtn.setAttribute('disabled', 'true')
+    }
+    else{
+        delBtn.addEventListener('click', ()=>{
+            if (confirm("Do You Really Want to Delete Data of This Employee?")) {
+                window.location.href = `/delEmpID/${list2[0]}`;
+            }
+        });
+    }
+</script>
+</body>
+
+</html>

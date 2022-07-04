@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Employees</title>
+    <link rel="stylesheet" href="{% static 'fapro/css/all.css' %}">
+    <style>
+        :root {
+            --accent: #262626;
+            --accent-light: #26262622;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+            user-select: none;
+            transition: 0.3s;
+        }
+        
+        h1 {
+            color: var(--accent);
+            font-size: 3em;
+            margin-top: 20px;
+        }
+
+        .box {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table{
+            border: 1px solid var(--accent);
+            margin-bottom: 50px;
+        }
+        th,
+        td {
+            word-wrap: wrap;
+            width: 170px;
+            padding: 5px;
+            color: var(--accent);
+            text-align: center;
+        }
+        th{
+            height: 50px;
+            background: var(--accent);
+            color: white;
+        }
+        tr:nth-child(2n){
+            background: var(--accent-light);
+        }
+
+        .backLink {
+            text-decoration: none;
+            color: var(--accent);
+            margin: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="backLink"><i class="fa fa-angle-left"></i> Home</a>
+    <center>
+        <h1>All Employees</h1>
+    </center>
+    <div class="box">
+        <table cellspacing="0">
+            <tr>
+                <th>Employee's ID</th>
+                <th>Employee's Name</th>
+                <th>Employee's Post</th>
+                <th>Employee's Gender</th>
+                <th>Employee's Salary</th>
+                <th>Employee's Mobile</th>
+            </tr>
+            {% for x in empList %}
+        
+            <tr>
+              {% for data in x %}
+                  <td>{{ data }}</td>
+              {% endfor %}
+            </tr>
+            
+          {% endfor %}
+       
+        </table>
+    </div>
+</body>
+
+</html>

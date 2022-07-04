@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management - Login</title>
+    <link rel="stylesheet" href="{% static 'fapro/css/all.css' %}">
+    <style>
+        :root{
+            --accent: #262626;
+            --accent-light: #26262622;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+            transition: 0.3s;
+            user-select: none;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .box h2{
+            font-size: 3em;
+            color: var(--accent);
+        }
+        .box .username{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid var(--accent);
+            padding: 10px;
+            border-radius: 38px;
+            color: var(--accent);
+            cursor: pointer;
+        }
+        .box .username:hover{
+            background: var(--accent-light);
+        }
+        .box .username img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .box input{
+            width: 295px;
+            padding: 10px;
+            border-radius: 21px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            outline: none;
+            color: var(--accent);
+            font-family: Muli;
+        }
+        .box input::placeholder{font-family: Poppins;}
+        .box input:placeholder-shown{
+            border: 2px solid rgba(0, 0, 0, 0.2);
+        }
+        .box input:focus{
+            border: 2px solid var(--accent);
+        }
+        .box input:focus::placeholder{
+            color: var(--accent);
+        }
+        .box button{
+            width: 150px;
+            height: 40px;
+            cursor: pointer;
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        .box button:hover i{
+            margin-left: 10px;
+        }
+        .box button:active{
+            background: var(--accent);
+            color: white;
+        }
+        
+        .msg{
+            opacity: 0;
+            color: white;
+            background: var(--accent);
+            padding:10px 20px;
+            margin: auto auto;
+            width: fit-content;
+            animation: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        @keyframes hideit{
+            0%{
+                opacity: 1;
+            }
+            25%{
+                opacity: 1;
+            }
+            50%{
+                opacity: 1;
+            }
+            75%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+
+            }
+        }
+
+        
+    </style>
+</head>
+<body>
+    <p class="msg">Invalid Credentials</p>
+    <div class="box">
+        <h2>Hey, Vaibhav</h2>
+        <div class="username">
+            <img src="{% static 'pic.jpg' %}">
+            <b>Vaibhav Mishra<br><small>mishravaibhav950@gmail.com</small> </b>
+        </div>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <input type="password" placeholder="Password" id="pass" name='passwd'>
+            <button type="submit" id="login-btn">LOGIN <i class="fa fa-arrow-right"></i></button>
+        </form>
+    </div>
+{% comment "" %}
+    <script>
+    let inputBox = document.getElementById('pass');
+    let loginBtn = document.getElementById('login-btn');
+    loginBtn.onclick = function(){
+        if (inputBox.value == "kanha@8827") {
+            window.location.href = '/';
+        }
+        else{
+            let msg = document.querySelector('.msg');
+            msg.style.animation = 'hideit 3s forwards';
+                setTimeout(()=>{
+                msg.style.animation = 'none';
+            }, 4000);
+        }
+    }
+</script>
+{% endcomment %}
+</body>
+</html>
