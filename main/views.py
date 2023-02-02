@@ -3,7 +3,7 @@ import mysql.connector as sql
 from django.contrib import messages
 
 
-con = sql.connect(host="localhost", user="root", passwd="0003", database="test", charset='utf8')
+con = sql.connect(host="localhost", user="root", passwd="0003", database="test")
 cursor= con.cursor()
 
 # Create your views here.
