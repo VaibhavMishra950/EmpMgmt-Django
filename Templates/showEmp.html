@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +10,12 @@
     <link rel="stylesheet" href="{% static 'fapro/css/all.css' %}">
     <style>
         :root {
-            --accent: #262626;
-            --accent-light: #26262622;
+            --accent: #ffffff;
+            --accent-light: #ffffff22;
+        }
+
+        body {
+            background: #000;
         }
 
         * {
@@ -21,7 +26,30 @@
             user-select: none;
             transition: 0.3s;
         }
-        
+
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -999;
+            display: flex;
+        }
+
+        .bg .bg-left {
+            position: relative;
+            top: 200px;
+            left: 0;
+            filter: saturate(1.5);
+        }
+
+        .bg .bg-right {
+            position: relative;
+            top: -50px;
+            right: 0;
+        }
+
         h1 {
             color: var(--accent);
             font-size: 3em;
@@ -38,10 +66,12 @@
             justify-content: center;
             align-items: center;
         }
-        table{
+
+        table {
             border: 1px solid var(--accent);
             margin-bottom: 50px;
         }
+
         th,
         td {
             word-wrap: wrap;
@@ -50,12 +80,14 @@
             color: var(--accent);
             text-align: center;
         }
-        th{
+
+        th {
             height: 50px;
             background: var(--accent);
-            color: white;
+            color: black;
         }
-        tr:nth-child(2n){
+
+        tr:nth-child(2n) {
             background: var(--accent-light);
         }
 
@@ -69,6 +101,10 @@
 </head>
 
 <body>
+    <div class="bg">
+        <img class="bg-left" src="{% static 'img/gradient-left-dark.svg' %}">
+        <img class="bg-right" src="{% static 'img/gradient-right-dark.svg' %}">
+    </div>
     <a href="/" class="backLink"><i class="fa fa-angle-left"></i> Home</a>
     <center>
         <h1>All Employees</h1>
@@ -84,15 +120,15 @@
                 <th>Employee's Mobile</th>
             </tr>
             {% for x in empList %}
-        
+
             <tr>
-              {% for data in x %}
-                  <td>{{ data }}</td>
-              {% endfor %}
+                {% for data in x %}
+                <td>{{ data }}</td>
+                {% endfor %}
             </tr>
-            
-          {% endfor %}
-       
+
+            {% endfor %}
+
         </table>
     </div>
 </body>

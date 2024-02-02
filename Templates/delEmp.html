@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,8 +10,8 @@
     <link rel="stylesheet" href="{% static 'fapro/css/all.css' %}">
     <style>
         :root {
-            --accent: #262626;
-            --accent-light: #26262622;
+            --accent: #ffffff;
+            --accent-light: #ffffff22;
         }
 
         * {
@@ -20,6 +21,31 @@
             font-family: Poppins;
             user-select: none;
             transition: 0.3s;
+        }
+        body{
+            background: #000;
+        }
+        .bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -999;
+            display: flex;
+        }
+
+        .bg .bg-left {
+            position: relative;
+            top: 200px;
+            left: 0;
+            filter: saturate(1.5);
+        }
+
+        .bg .bg-right {
+            position: relative;
+            top: -50px;
+            right: 0;
         }
 
         h1 {
@@ -53,7 +79,7 @@
         }
 
         .delInput form input:placeholder-shown {
-            border: 2px solid rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .delInput form input:focus {
@@ -73,37 +99,44 @@
             cursor: pointer;
             background: var(--accent);
             border: 2px solid var(--accent);
-            color: white;
+            color: black;
             font-weight: 600;
         }
-        .userData{
+
+        .userData {
+            color: var(--accent);
             display: grid;
             grid-template-columns: auto auto;
             margin-top: 20px;
         }
-        .userData p{
+
+        .userData p {
             margin: 10px 0;
         }
-        .userData p:nth-child(2n-1){
+
+        .userData p:nth-child(2n-1) {
             font-weight: 600;
         }
-        .delBtn{
+
+        .delBtn {
             margin-top: 40px;
-            padding: 10px 20px ;
+            padding: 10px 20px;
             border-radius: 38px;
             background: var(--accent);
-            color: white;
+            color: black;
             font-weight: 600;
-            border: 2px soplid var(--accent);
+            border: 2px solid var(--accent);
             cursor: pointer;
         }
-        .backLink{
+
+        .backLink {
             text-decoration: none;
             color: var(--accent);
             margin: 10px;
             font-size: 18px;
         }
-        button:disabled{
+
+        button:disabled {
             background: #555;
             cursor: auto;
         }
@@ -111,6 +144,10 @@
 </head>
 
 <body>
+    <div class="bg">
+        <img class="bg-left" src="{% static 'img/gradient-left-dark.svg' %}">
+        <img class="bg-right" src="{% static 'img/gradient-right-dark.svg' %}">
+    </div>
     <a href="/" class="backLink"><i class="fa fa-angle-left"></i> Home</a>
     <center>
         <h1>Delete Employee</h1>
@@ -124,49 +161,49 @@
             </form>
         </div>
         <div class="delBox">
-            
-        <div class="userData">
-            <p>Employee's ID: </p>
-            <p class='data'>Emp01</p>
 
-            <p>Employee's Name: </p>
-            <p class='data'>Vaibhav Mishra</p>
+            <div class="userData">
+                <p>Employee's ID: </p>
+                <p class='data'>Emp01</p>
 
-            <p>Employee's Post: </p>
-            <p class='data'>Chief Executing Officer</p>
+                <p>Employee's Name: </p>
+                <p class='data'>Vaibhav Mishra</p>
 
-            <p>Employee's Gender: </p>
-            <p class='data'>Male</p>
+                <p>Employee's Post: </p>
+                <p class='data'>Chief Executing Officer</p>
 
-            <p>Employee's Salary: </p>
-            <p class='data'>150</p>
+                <p>Employee's Gender: </p>
+                <p class='data'>Male</p>
 
-            <p>Employee's Mobile: </p>
-            <p class='data'>8989898989</p>
-        </div>
-        <center><button class="delBtn">Delete Employee</button></center>
+                <p>Employee's Salary: </p>
+                <p class='data'>150</p>
+
+                <p>Employee's Mobile: </p>
+                <p class='data'>8989898989</p>
+            </div>
+            <center><button class="delBtn">Delete Employee</button></center>
         </div>
     </div>
-<script>
-    let datas = document.querySelectorAll('.data');
-    let list =  {{ empList | safe }}
+    <script>
+        let datas = document.querySelectorAll('.data');
+        let list = {{ empList | safe }}
 
-    for (let x = 0; x < datas.length; x++) {
-        datas[x].innerText = list[x];
-    }
-    let list2 =  {{ empList | safe }}
-    let delBtn = document.querySelector('.delBtn');
-    if(list2[0] == "......."){
-        delBtn.setAttribute('disabled', 'true')
-    }
-    else{
-        delBtn.addEventListener('click', ()=>{
-            if (confirm("Do You Really Want to Delete Data of This Employee?")) {
-                window.location.href = `/delEmpID/${list2[0]}`;
-            }
-        });
-    }
-</script>
+        for (let x = 0; x < datas.length; x++) {
+            datas[x].innerText = list[x];
+        }
+        let list2 = {{ empList | safe }}
+        let delBtn = document.querySelector('.delBtn');
+        if (list2[0] == ".......") {
+            delBtn.setAttribute('disabled', 'true')
+        }
+        else {
+            delBtn.addEventListener('click', () => {
+                if (confirm("Do You Really Want to Delete Data of This Employee?")) {
+                    window.location.href = `/delEmpID/${list2[0]}`;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

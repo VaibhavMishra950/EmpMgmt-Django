@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
 
-
 con = sql.connect(host="localhost", user="root", passwd="0003", database="test")
 cursor= con.cursor()
 
@@ -30,7 +29,7 @@ def login(request):
     global loggedIn
     if request.method == "POST":
         passwd = request.POST['passwd']
-        if passwd == "kanha@8827":
+        if passwd == "123456789":
             loggedIn = True
             return redirect('/')
     if loggedIn:
