@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 import mysql.connector as sql
 from django.contrib import messages
+import config
 
-con = sql.connect(host="localhost", user="root", passwd="0003", database="test")
+con = sql.connect(host=config.DB_HOSTNAME, user=config.DB_USERNAME, passwd=config.DB_PASSWORD, database=config.DB_DATABASE)
 cursor= con.cursor()
 
 # Create your views here.
